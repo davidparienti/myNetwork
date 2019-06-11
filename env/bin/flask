@@ -1,4 +1,4 @@
-#!/Users/davidparienti/Downloads/themeforest-21647879-workwise-the-freelancer-and-social-networking-html-template/Projet_social/myNetwork/env/bin/python3
+#!/Users/davidparienti/Desktop/myNetwork/env/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys

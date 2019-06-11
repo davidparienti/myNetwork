@@ -1,0 +1,208 @@
+{% include "include/header.html" %}
+
+
+
+		<section class="cover-sec">
+		</section>
+
+
+		<main>
+			<div class="main-section">
+				<div class="container">
+					<div class="main-section-data">
+						<div class="row">
+							<div class="col-lg-4">
+								<div class="main-left-sidebar">
+									<div class="user_profile">
+										<div class="user-pro-img">
+											{% if user.profil_media %}
+
+											<img src="/static/avatar/{{user.profil_media}}" width="170px" alt="">
+											
+											{% else %}
+												<img src="http://via.placeholder.com/170x170" alt="">
+											
+											{% endif %}
+										</div><!--user-pro-img end-->
+										<ul class="flw-status" style="    margin-bottom: 18px;">
+												<li><a href="/followings/{{ user.username }}">
+													<span class="hover_username">Following</span>
+													<b class="hover_username">{{ user.nb_following }}</b>
+												</a>
+												</li>
+												<li><a href="/followers/{{ user.username }}">
+													<span class="hover_username">Followers</span>
+													<b  class="hover_username"id="nb_follower" >{{ user.nb_follower }}</b>
+												</a>
+												</li>
+											</ul>
+											<br><br>
+
+										{% if user.id != session['id'] %}
+										<div class="company-up-info">	
+										<ul>
+											{% if user.followed > 0 %}
+											<li><a href="#" title="" id="follow_button_{{ user.username }}"  onclick="follow('{{ user.username }}')" class="follow">Unfollow</a></li>
+											{% else %}
+											<li><a href="#" title="" id="follow_button_{{ user.username }}"  onclick="follow('{{ user.username }}')" class="follow">Follow</a></li>
+											{% endif %}
+										</ul>
+										</div>
+										{% endif %}
+										<ul class="social_links">
+											<li><a href="#" title=""><i class="la la-globe"></i> {{ user.email }}</a></li>
+											<li><a href="#" title=""><i class="fab fa-facebook-square"></i>Http://www.facebook.com/{{ user.username }}</a></li>
+										</ul>
+
+									</div><!--user_profile end-->
+
+									{% if user.nb_following > 0 %}
+									<div class="suggestions full-width">
+										<div class="sd-title">
+											<h3>Following of {{ user.full_name }}</h3>
+											<i class="la la-ellipsis-v"></i>
+										</div><!--sd-title end-->
+
+										<div class="suggestions-list">
+											{% for following in followings %}
+											<a href="/profile/{{ following.username }}" title="" class="view-more-pro hover_username">
+											<div class="suggestion-usd">
+												
+													{% if following.profil_media %}
+
+									<img src="/static/avatar/{{following.profil_media}}" width="35px" alt="">
+
+											{% else %}
+
+											<img src="http://via.placeholder.com/35x35" alt="">
+											
+											{% endif %}
+												<div class="sgt-text">
+													<h4 class="hover_username"> {{ following.full_name }}</h4>
+													<span class="hover_username">{{ following.username }}</span>
+												
+												</div>
+												<span><i class="la la-arrow-right"></i></span>
+											</div></a>
+											 {% endfor %}
+											<div class="view-more">
+												<a href="/followings/{{ user.username }}" title="">View More</a>
+											</div>
+										</div><!--suggestions-list end-->
+									
+
+									</div><!--suggestions end-->
+										{% endif %}
+
+								</div><!--main-left-sidebar end-->
+							</div>
+							<div class="col-lg-8">
+								<div class="main-ws-sec">
+									<div class="user-tab-sec">
+										<h3>{{ user.full_name  }}</h3>
+										<div class="star-descp">
+											<span>@{{ user.username }}</span>
+										</div><!--star-descp end-->
+
+									</div><!--user-tab-sec end-->
+							
+<div class="post-topbar" id='form_post'
+{% if user.id != session['id'] and user.followed == 0 %}
+style="display: none;" 
+{% endif %}
+
+>
+									<div class="post-project-fields">
+					<form action="/postmessage"  method="post">
+						<div class="row">
+							<div class="col-lg-12">
+								<input type="hidden" name="redirection" value="{{ user.username}}">
+								<input type="text" name="title" placeholder="Your Title" value="{% if user.id != session['id'] %}@{{ user.username }}{% endif %}"
+								{% if user.id != session['id'] %} 
+
+								style="font-size: 18px ; font-weight: bolder;color:#000;" 
+readonly="readonly"
+								{% endif %} >
+							</div>
+							<div class="col-lg-12">
+								<textarea name="message" placeholder="Post your message"></textarea>
+							</div>
+							<div class="col-lg-12 text-right">
+								<ul>
+									<li><button class="active" type="submit" value="post">Post</button></li>
+								</ul>
+							</div>
+						</div>
+					</form>
+				</div>
+									
+									</div>
+
+									<div class="product-feed-tab current" id="feed-dd">
+										<div class="posts-section">  {% for post in posts %}
+										<div class="post-bar">
+											<div class="post_topbar">
+												<div class="usy-dt">
+
+														{% if post.profil_media %}
+								<img src="/static/avatar/{{ post.profil_media }}" style="    width: 50px;" alt="">
+							{% else %}
+							<img src="http://via.placeholder.com/50x50" alt="">
+							{% endif %}
+
+
+													
+													<div class="usy-name">
+														<h3>{{ post.full_name }}</h3>
+														<span><img src="/static/images/clock.png" alt="">{{ 
+
+													post.created }}</span>
+													</div>
+												</div>
+											
+											</div>
+					
+											<div class="job_descp">
+												<h3>{{ post.title }}</h3>
+										
+												<p>{{ post.message }}</p>
+											
+											</div>
+											<div class="job-status-bar">
+												<ul class="like-com">
+													<li>
+														<a href="#link_post_like_{{ post.id }}" 
+														id="link_post_like_{{ post.id }}"
+														onclick="like({{ post.id }})"
+
+													{% if post.liked == 1 %}
+													class="active"
+													{% endif %}
+														> 
+
+															<em id="nb_like_{{ post.id }}">{{ post.nb_like }}</em> 
+															<i class="la la-heart"></i><em id="text_like_{{ post.id }}">Likes</em>
+														</a>
+														
+													</li> 
+													<li><a href="/post/{{ post.id }}" title="" class="com"><img src="images/com.png" alt="">{{ post.nb_comment }} Comments</a></li>
+												</ul>
+											</div>
+										</div><!--post-bar end-->
+										 {% endfor %}
+										</div><!--posts-section end-->
+									</div><!--product-feed-tab end-->
+									</div><!--product-feed-tab end-->
+								</div><!--main-ws-sec end-->
+							</div>
+										</div><!--pf-gallery end-->
+								</div><!--right-sidebar end-->
+							</div>
+						</div>
+					</div><!-- main-section-data end-->
+				</div> 
+			</div>
+		</main>
+
+{% include "include/footer.html" %}
+

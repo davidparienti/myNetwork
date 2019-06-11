@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Social Net Html Template</title>
+<title>MyNetwork - {{ page_name }}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="" />
 <meta name="keywords" content="" />
@@ -16,6 +16,77 @@
 <link rel="stylesheet" type="text/css" href="/static/lib/slick/slick-theme.css">
 <link rel="stylesheet" type="text/css" href="/static/css/style.css">
 <link rel="stylesheet" type="text/css" href="/static/css/responsive.css">
+<script src="https://kit.fontawesome.com/9ae1bc492c.js"></script>
+
+
+
+<script type="text/javascript" src="/static/js/jquery.min.js"></script>
+<style type="text/css">
+	.error_field
+	{
+		padding: 16px;
+    color: red;
+	}
+	.active {
+    color: #0094ff;
+}
+
+.success
+{
+	padding: 14px;
+    color: green;
+}
+.hover_username:hover
+{
+color: #0094ff !important
+}
+</style>
+
+
+<script type="text/javascript">
+	
+
+	function like(post_id,liked)
+	{
+		$.get( "http://127.0.0.1:5000/like/" + post_id, function( data ) {
+
+
+			$("#nb_like_"+post_id).text(data.nb_like);
+			if ($("#link_post_like_"+post_id).hasClass("active") ) {
+				$( "#link_post_like_"+post_id ).removeClass( "active" );
+			}
+			else
+			{
+				$( "#link_post_like_"+post_id ).addClass( "active" );
+			}
+		});
+	}
+
+
+	function follow(username)
+	{
+		$.get( "http://127.0.0.1:5000/follow/" + username, function( data ) {
+			
+			var nb_follower = parseInt($("#nb_follower").text());
+			if( data == 'unfollow')
+			{	
+
+				$("#form_post").hide('slow');
+				nb_follower = nb_follower - 1; 
+				$("#follow_button_"+username).text("Follow");
+			}
+			else if( data == 'follow')
+			{	
+				nb_follower++;
+
+				$("#form_post").show('slow');
+				$("#follow_button_"+username).text("Unfollow");
+			}
+
+			$("#nb_follower").text(nb_follower);
+		});
+	}
+</script>
 </head>
 
 {% if 'username' in session %}
@@ -37,34 +108,38 @@
 			<div class="container">
 				<div class="header-data">
 					<div class="logo">
-						<a href="/static/index.html" title=""><img src="/static/images/logo.png" alt=""></a>
+						<a href="/" title=""><img src="/static/images/logo2.png"  height="50px" alt=""></a>
 					</div><!--logo end-->
 					<div class="search-bar">
-						<form>
-							<input type="text" name="search" placeholder="Search...">
+						<form action="/search" method="post">
+							<input type="text" name="query" placeholder="Search...">
 							<button type="submit"><i class="la la-search"></i></button>
 						</form>
 					</div><!--search-bar end-->
 					<nav>
 						<ul>
 							<li>
-								<a href="/static/index.html" title="">
-									<span><img src="/static/images/icon1.png" alt=""></span>
+								<a href="/" title="">
+									<span><i class="fas fa-home" style="color: #0094ff;"></i></span>
 									Home
 								</a>
 							</li>
 							<li>
-								<a href="/static/companies.html" title="">
-									<span><img src="/static/images/icon2.png" alt=""></span>
+								<a href="/profile/{{ session.username }}" title="">
+									<span><i class="fas fa-user" style="color: #0094ff;"></i></span>
 									My Profile
 								</a>
 							</li>
 							<li>
-								<a href="/static/profiles.html" title="">
-									<span><img src="/static/images/icon4.png" alt=""></span>
-									Friends
+								<a href="/followings/{{ session.username }}" title="">
+									<span><i class="fas fa-users" style="color: #0094ff;"></i></span>
+									Followings
 								</a>
 							</li>
+							<li>
+								<a href="/followers/{{ session.username }}" title="">
+									<span><i class="fas fa-users" style="color: #0094ff;"></i></span>
+									Followers
 						</ul>
 					</nav><!--nav end-->
 					<div class="menu-btn">
@@ -72,17 +147,22 @@
 					</div><!--menu-btn end-->
 					<div class="user-account">
 						<div class="user-info">
-							<img src="http://via.placeholder.com/30x30" alt="">
-							<a href="/static/#" title="">John</a>
+							{% if session.profil_media %}
+								<img src="/static/avatar/{{ session.profil_media }}" style="    width: 31px;" alt="">
+							{% else %}
+								<img src="http://via.placeholder.com/30x30" alt="">
+							{% endif %}
+
+						
+							<a href="/profile/{{ session.username }} " title=""> {{ session.username }} </a>
 							<i class="la la-sort-down"></i>
 						</div>
 						<div class="user-account-settingss">
-				
-							<h3>Setting</h3>
-							<h3 class="tc"><a href="/static/sign-in.html" title="">Logout</a></h3>
+							<h3 class="tc"><a href="/setting" >Account Setting</a></h3>
+							<h3 class="tc"><a href="/logout" title="">Logout</a></h3>
 						</div><!--user-account-settingss end-->
 					</div>
 				</div><!--header-data end-->
 			</div>
 		</header><!--header end-->
-    {% endif %}
+{% endif %} 

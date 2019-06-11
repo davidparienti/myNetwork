@@ -1,4 +1,6 @@
 {% include "include/header.html" %}
+
+
 	<div class="wrapper">
 		
 
@@ -9,22 +11,38 @@
 						<div class="col-lg-6">
 							<div class="cmp-info">
 								<div class="cm-logo">
-									<img src="static/images/cm-logo.png" alt="">
-									<p>Workwise,  is a global freelancing platform and social networking where businesses and independent professionals connect and collaborate remotely</p>
+									<img src="static/images/logo2.png" alt="">
+									<p>MyNetwork is an open channel  that lets you share and connect with family & friends and meet new people around the world</p>
 								</div><!--cm-logo end-->	
-								<img src="static/images/cm-main-img.png" alt="">			
+								<img src="static/images/accueil2.png" alt="">			
 							</div><!--cmp-info end-->
 						</div>
 						<div class="col-lg-6">
 							<div class="login-sec">
 								<ul class="sign-control">
-									<li data-tab="tab-1" class="current"><a href="#" title="">Sign in</a></li>				
-									<li data-tab="tab-2"><a href="#" title="">Sign up</a></li>				
+
+									{% if request.path == '/sign_up' %}
+
+									<li data-tab="tab-1" ><a href="#" title="">Sign in </a></li>				
+									<li data-tab="tab-2" class="current" id="sign_up_tab "  ><a href="#" title="">Sign up</a></li>	
+
+									{% else %}
+
+
+									<li data-tab="tab-1" class="current"  ><a href="#" title="">Sign in </a></li>				
+									<li data-tab="tab-2" id="sign_up_tab"  ><a href="#" title="">Sign up</a></li>	
+
+									{% endif %}			
 								</ul>			
-								<div class="sign_in_sec current" id="tab-1">
+								<div class="sign_in_sec {% if request.path != '/sign_up' %} current {% endif %}	" id="tab-1">
 									
 									<h3>Sign in</h3>
-									<form>
+									{% if 'login' in error_array %}
+														<div class="error_field">{{ error_array['login'] }}
+														</div>
+													{% endif %}
+									<!-- /////// LOGIN ///////// -->
+									<form action = "/login" method = "POST">
 
 										<div class="row">
 											<div class="col-lg-12 no-pdd">
@@ -56,41 +74,63 @@
 										</div>
 									</form>
 								</div><!--sign_in_sec end-->
-								<div class="sign_in_sec" id="tab-2">
-									<div class="dff-tab current" id="tab-3">
-											<h3>Sign up</h3>
-										<form method="post">
+								<div class="sign_in_sec {% if request.path == '/sign_up' %} current {% endif %} " id="tab-2">
+									<div class="{% if request.path == '/sign_up' %} current {% endif %} " id="tab-3">
+											<h3>Sign up </h3>
+
+											<!-- /////// SINGUP ///////// -->
+										<form action = "/sign_up" method = "POST">
 											<input type="hidden" name="form" value="sign_up">
 											<div class="row">
 												<div class="col-lg-12 no-pdd">
 													<div class="sn-field">
-														<input type="text" name="name" placeholder="Full Name">
+														<input type="text" name="fullname" placeholder="Full Name">
 														<i class="la la-user"></i>
 													</div>
+													{% if 'fullname' in error_array %}
+														<div class="error_field">{{ error_array['fullname'] }}
+														</div>
+													{% endif %}
 												</div>
 												<div class="col-lg-12 no-pdd">
 													<div class="sn-field">
 														<input type="text" name="username" placeholder="Username">
 														<i class="la la-globe"></i>
 													</div>
+													{% if 'username' in error_array %}
+														<div class="error_field">{{ error_array['username'] }}
+														</div>
+													{% endif %}
 												</div>
 												<div class="col-lg-12 no-pdd">
 													<div class="sn-field">
 														<input type="email" name="email" placeholder="Email">
 														<i class="la la-at"></i>
 													</div>
+													{% if 'email' in error_array %}
+														<div class="error_field">{{ error_array['email'] }}
+														</div>
+													{% endif %}
 												</div>
 												<div class="col-lg-12 no-pdd">
 													<div class="sn-field">
 														<input type="password" name="password" placeholder="Password">
 														<i class="la la-lock"></i>
 													</div>
+													{% if 'password' in error_array %}
+														<div class="error_field">{{ error_array['password'] }}
+														</div>
+													{% endif %}
 												</div>
 												<div class="col-lg-12 no-pdd">
 													<div class="sn-field">
-														<input type="password" name="repeat-password" placeholder="Repeat Password">
+														<input type="password" name="repeat_password" placeholder="Repeat Password">
 														<i class="la la-lock"></i>
 													</div>
+													{% if 'password_repeat' in error_array %}
+														<div class="error_field">{{ error_array['password_repeat'] }}
+														</div>
+													{% endif %}
 												</div>
 												<div class="col-lg-12 no-pdd">
 													<div class="checky-sec st2">
@@ -124,5 +164,4 @@
 
 
 	</div>
-
 	{% include "include/footer.html" %}

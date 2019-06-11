@@ -74,7 +74,7 @@ body {
 	font-family: 'Source Sans Pro', sans-serif;
 	overflow-x: hidden;
 	font-weight: 400;
-	background-color: #eeeeee;
+	background-color: #efefef;
 }
 ol, ul {
 	list-style: none;
@@ -264,7 +264,7 @@ nav ul li:hover > ul,
 header {
 	float: left;
 	width: 100%;
-	background-color: #e44d3a;
+	background-color: #e4f7fc;
 }
 .header-data {
 	float: left;
@@ -351,7 +351,8 @@ header {
 }
 .search-bar {
 	float: left;
-	width: 280px;
+	margin-left: 14%;
+	width: 239px;
 	margin-top: 9px;
 }
 .search-bar form {
@@ -378,21 +379,22 @@ header {
 	border: 0;
 }
 .search-bar form button i {
-	color: #e44d3a;
+	color: #0094ff;
 	font-size: 20px;
 	font-weight: bold;
 }
 
 nav {
 	float: left;
-	width: 60%;
-	text-align: right;
-	padding-right: 13px;
+	width: 36%;
+	/* text-align: right; */
+	padding-right: 5px;
+	padding-left: 3%;
 }
 nav ul li {
 	display: inline-block;
 	text-align: center;
-	padding: 13px 13px;
+	padding: 13px 17px;
 	position: relative;
 }
 nav ul li:hover > ul {
@@ -516,7 +518,7 @@ nav ul li span img {
 	float: none;
 }
 nav ul li a {
-	color: #ffffff;
+	color: #0094ff;
 	font-size: 14px;
 }
 nav > ul > li > a:hover {
@@ -525,9 +527,9 @@ nav > ul > li > a:hover {
 
 .user-account {
 	float: right;
-	width: 110px;
-	border-left: 1px solid #dd3e2b;
-	border-right: 1px solid #dd3e2b;
+	width: 198px;
+	/* border-left: 1px solid #0094ff; */
+	/* border-right: 1px solid #0094ff; */
 	box-sizing: border-box;
 	position: relative;
 }
@@ -661,28 +663,32 @@ nav > ul > li > a:hover {
 	color: #000;
 }
 .user-info img {
-	margin-right: 10px;
+	margin-right: 14px;
 	-webkit-border-radius: 100px;
 	-moz-border-radius: 100px;
 	-ms-border-radius: 100px;
 	-o-border-radius: 100px;
 	border-radius: 100px;
+	width: 47px !important;
 }
 .user-info a {
-	color: #fff;
+	color: #0094ff;
 	font-size: 14px;
 	float: left;
-	margin-top: 8px;
+	margin-top: 14px;
+	font-size: 15px;
+	font-weight: bolder;
 }
 .user-info a:hover {
 	color: #fff;
 }
 .user-info > i {
+	font-size: 20px;
 	position: absolute;
 	top: 51%;
-	right: 10px;
-	color: #fff;
-	font-size: 12px;
+	right: 17px;
+	color: #0094ff;
+	font-size: 22px;
 	-webkit-transform: translateY(-50%);
 	-moz-transform: translateY(-50%);
 	-ms-transform: translateY(-50%);
@@ -690,7 +696,7 @@ nav > ul > li > a:hover {
 	transform: translateY(-50%);
 }
 
-
+ 
 
 /* =================== main-section ================= */
 
@@ -711,7 +717,7 @@ main {
 .main-left-sidebar {
 	float: left;
 	width: 100%;
-	margin-top: -20px;
+	/* margin-top: -20px; */
 }
 .full-width {
 	float: left;
@@ -725,7 +731,7 @@ main {
 .username-dt {
 	float: left;
 	width: 100%;
-	background-color: #e44d3a;
+	background-color: #0094ff;
 	padding-top: 40px;
 }
 .user-data {
@@ -798,9 +804,9 @@ main {
 	font-size: 20px;
 }
 .user-fw-status li a {
-	color: #e44d3a;
+	color: #0093ff;
 	font-size: 14px;
-	font-weight: 600;	
+	font-weight: 600;
 }
 
 /* ============= Suggestions ============ */
@@ -873,7 +879,7 @@ main {
 	cursor: pointer;
 }
 .suggestion-usd > span i:hover {
-	background-color: #e44d3a;
+	background-color: #0093ff;
 	color: #fff;
 }
 .view-more {
@@ -883,12 +889,12 @@ main {
 	padding-top: 10px;
 }
 .view-more > a {
-	color: #e44d3a;
+	color: #0093ff;
 	font-size: 14px;
 	font-weight: 700;
 }
 .view-more > a:hover {
-	color: #e44d3a
+	color: #e4f7fc;
 }
 
 
@@ -896,7 +902,7 @@ main {
 /* ============== tags-sec ============= */
 
 .tags-sec {
-	background-color: #fff;
+	background-color: #e4f7fc;
 	padding: 25px 5px;
 }
 .tags-sec ul {
@@ -933,6 +939,7 @@ main {
 .cp-sec > img {
 	float: left;
 	margin-top: 3px;
+	width: 96%;
 }
 .cp-sec p {
 	float: right;
@@ -963,7 +970,7 @@ main {
 	width: 100%;
 	padding: 0px 0px;
 	background-color: #fff;
-	border-top: 4px solid #e44d3a;
+	border-top: 4px solid #0094ff;
 	border-left: 1px solid #e4e4e4;
 	border-bottom: 1px solid #e4e4e4;
 	border-right: 1px solid #e4e4e4;
@@ -1277,10 +1284,10 @@ main {
 	margin-right: 5px;
 }
 .like-com li a:hover {
-	color: #e44d3a;
+	color: #0094ff;
 }
 .like-com li a.active {
-	color: #e44d3a;
+	color: #0094ff;
 }
 .like-com li a i {
 	margin-right: 2px;
@@ -1876,7 +1883,7 @@ main {
 	margin-right: 15px;
 }
 .post-project-fields form ul li button.active {
-	background-color: #e44d3a;
+	background-color: #0094ff;
 	color: #fff;
 }
 .post-project-fields form ul li button,
@@ -1892,7 +1899,7 @@ main {
 }
 .post-project-fields form ul li button:hover,
 .post-project-fields form ul li a:hover {
-	background-color: #e44d3a;
+	background-color: #e3f7fc;
 	color: #fff;
 } 
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
@@ -1961,7 +1968,7 @@ select {
 /* ================= sign-in ================ */
 
 .sign-in {
-	background-color: #e75348;
+	background-color: #e5e5e5;
 }
 .sign-in-page {
 	float: left;
@@ -2004,7 +2011,7 @@ select {
 .signin-pop {
 	float: left;
 	width: 100%;
-	background-color: #fff;
+	background-color: #e4f7fc;
 	position: relative;
 }
 .signin-pop:before {
@@ -2019,7 +2026,7 @@ select {
 	transform: translateX(-50%);
 	height: 100%;
 	width: 1px;
-	background-color: #f0f0f0;
+	/* background-color: #f0f0f0; */
 }
 
 .dff-tab {
@@ -2038,10 +2045,11 @@ select {
 	float: left;
 	width: 100%;
 	padding-left: 45px;
-	margin-bottom: 120px;
+	margin-bottom: 42px;
 }
 .cm-logo img {
 	margin-bottom: 30px;
+	width: 100%;
 }
 .cm-logo > p {
 	color: #000000;
@@ -2053,7 +2061,8 @@ select {
 }
 .cmp-info > img {
 	width: 100%;
-	padding-left: 10px;
+	margin-left: 20px;
+	border-radius: 15px;
 }
 
 /* =============== login-sec ============= */
@@ -2124,7 +2133,7 @@ select {
 	border-radius: 0 4px 4px 0;
 }
 .sign-control li.current a {
-	background-color: #e44d3a;
+	background-color: #0094ff;
 	color: #fff;
 }
 .sign_in_sec {
@@ -2152,7 +2161,7 @@ select {
 	left: 0;
 	width: 30px;
 	height: 2px;
-	background-color: #e44d3a;
+	background-color: #0094ff;
 }
 
 
@@ -2217,7 +2226,7 @@ select {
 .sign_in_sec form button {
 	color: #ffffff;
 	font-size: 16px;
-	background-color: #e44d3a;
+	background-color: #0094ff;
 	padding: 12px 27px;
 	border:0;
 	font-weight: 500;
@@ -2552,7 +2561,7 @@ footer {
 	width: 100%;
 	text-align: center;
 	margin-bottom: 28px;
-	margin-top: -95px;
+	margin-top: 4px;
 	position: relative;
 }
 .user-pro-img > a {
@@ -2702,9 +2711,9 @@ footer {
 	padding-top: 4px;
 }
 .user-tab-sec h3 {
-	color: #000000;
+	color: #0094ff;
 	font-size: 40px;
-	font-weight: 400;
+	font-weight: 500;
 	text-transform: capitalize;
 	margin-bottom: 7px;
 }
@@ -3543,7 +3552,7 @@ a:hover {
 	top: 3px;
 }
 .follow {
-	background-color: #53d690;
+	background-color: #0094ff;
 }
 .message-us {
 	background-color: #e44d3a;
@@ -4253,7 +4262,7 @@ a:hover {
 }
 .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
 	background-color: inherit;
-	color: #e44d3a;
+	color: #0094ff;
 	border-color: inherit;
 }
 
@@ -4339,7 +4348,7 @@ a:hover {
 	cursor: pointer;
 }
 .save-stngs ul li button:hover {
-	background-color: #e44d3a;
+	background-color: #0094ff;
 	color: #fff;
 	border-color: transparent;
 }

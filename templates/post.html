@@ -1,0 +1,105 @@
+{% include "include/header.html" %}
+
+
+		<section class="forum-sec">
+			<div class="container">
+				<div class="forum-links-btn">
+					<a href="#" title=""><i class="fa fa-bars"></i></a>
+				</div>
+			</div>
+		</section>
+
+		<section class="forum-page">
+			<div class="container">
+				<div class="forum-questions-sec">
+					<div class="row">
+						<div class="col-lg-8">
+							<div class="forum-post-view">
+								<div class="usr-question">
+									<div class="usr_img">
+													{% if Post.profil_media %}
+								<img src="/static/avatar/{{ Post.profil_media }}" style="    width: 60px;" alt="">
+							{% else %}
+							<img src="http://via.placeholder.com/50x50" alt="">
+							{% endif %}
+
+									</div>
+									<div class="usr_quest">
+										<h3>{{ Post.title }}</h3>
+										<span><i class="fa fa-clock-o"></i>{{ Post.created }}</span>
+										<ul class="react-links">
+											<a href="#link_post_like_{{ Post.id }}" 
+														id="link_post_like_{{ Post.id }}"
+														onclick="like({{ Post.id }})"
+
+													{% if Post.liked == 1 %}
+													class="active"
+													{% endif %}
+														> 
+
+															<em id="nb_like_{{ Post.id }}">{{ Post.nb_like }}</em> 
+															<i class="la la-heart"></i><em id="text_like_{{ Post.id }}">Likes</em>
+														</a>
+										</ul>
+										<ul class="quest-tags">
+										</ul>
+										<p>{{ Post.message }}</p>
+										<div class="comment-section">
+											<h3>{{ Post.nb_comment }} Comments</h3>
+											<div class="comment-sec">
+												<ul>
+
+													{% for comment in Comments %}
+													<li>
+														<div class="comment-list">
+															<div class="bg-img">
+															
+													{% if comment.profil_media %}
+								<img src="/static/avatar/{{ comment.profil_media }}" style="    width: 40px;" alt="">
+							{% else %}
+							<img src="http://via.placeholder.com/40x40" alt="">
+							{% endif %}
+															</div>
+															<div class="comment">
+																<h3>{{ comment.username }}</h3>
+																<span><img src="images/clock.png" alt=""> {{ comment.created }}</span>
+																<p>{{ comment.message }}</p>
+															</div>
+														</div><!--comment-list end-->
+													</li>
+													 {% endfor %}
+													
+												</ul>
+											</div><!--comment-sec end-->
+										</div>
+									</div><!--usr_quest end-->
+								</div><!--usr-question end-->
+							</div><!--forum-post-view end-->
+							<div class="post-comment-box">
+								<h3>{{ Post.nb_comment }}  Comments</h3>
+								<div class="user-poster">
+									<div class="usr-post-img">
+											{% if session.profil_media %}
+								<img src="/static/avatar/{{ session.profil_media }}" style="    width: 31px;" alt="">
+							{% else %}
+								<img src="http://via.placeholder.com/30x30" alt="">
+							{% endif %}
+									</div>
+									<div class="post_comment_sec">
+										<form method="post">
+											<textarea placeholder="Your Comment" name="message"></textarea>
+											<button type="submit">Comment</button>
+										</form>
+									</div><!--post_comment_sec end-->
+								</div><!--user-poster end-->
+							</div><!--post-comment-box end-->
+						
+						</div>
+						
+						</div>
+					</div>
+				</div><!--forum-questions-sec end-->
+			</div>
+		</section><!--forum-page end-->
+		
+{% include "include/footer.html" %}

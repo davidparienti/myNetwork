@@ -12,45 +12,77 @@
 										<div class="user-profile">
 											<div class="username-dt">
 												<div class="usr-pic">
-													<img src="http://via.placeholder.com/100x100" alt="">
+														{% if session.profil_media %}
+								<img src="/static/avatar/{{ session.profil_media }}" style="    width: 120px;" alt="">
+							{% else %}
+								<img src="http://via.placeholder.com/30x30" alt="">
+							{% endif %}
 												</div>
 											</div><!--username-dt end-->
+											{% if 'username' in session %}
 											<div class="user-specs">
-												<h3>Full Name</h3>
-												<span>username</span>
+												<h3>{{ session.full_name }}</h3>
+												<span>{{ session.username }}</span>
 											</div>
 										</div><!--user-profile end-->
+
+												<ul class="flw-status" style="    margin-bottom: 18px;">
+												<li><a href="/followings/{{ user.username }}">
+													<span class="hover_username">Following</span>
+													<b class="hover_username">{{ user.nb_following }}</b>
+												</a>
+												</li>
+												<li><a href="/followers/{{ user.username }}">
+													<span class="hover_username">Followers</span>
+													<b  class="hover_username"id="nb_follower" >{{ user.nb_follower }}</b>
+												</a>
+												</li>
+											</ul>
+											<br><br>
+
 										<ul class="user-fw-status">
-											<li>
-												<h4>Friends</h4>
-												<span>34</span>
-											</li>
 									
 											<li>
-												<a href="/static/#" title="">View Profile</a>
+												<a href="/profile/{{ session.username }}" title="">View Profile</a>
 											</li>
 										</ul>
 									</div><!--user-data end-->
+									{% endif %}
 									<div class="suggestions full-width">
 										<div class="sd-title">
-											<h3>Friends</h3>
+											<h3>Suggestions de followings </h3>
 											<i class="la la-ellipsis-v"></i>
 										</div><!--sd-title end-->
 										<div class="suggestions-list">
-											<div class="suggestion-usd">
-												<img src="http://via.placeholder.com/35x35" alt="">
+
+										{% for suggestion in suggestions %}
+										<a href="/profile/{{suggestion.username}}" class="hover_username">
+											<div class="suggestion-usd ">
+											
+
+													{% if suggestion.profil_media %}
+
+									<img src="/static/avatar/{{suggestion.profil_media}}" width="35px" alt="">
+
+											{% else %}
+
+											<img src="http://via.placeholder.com/35x35" alt="">
+											
+											{% endif %}
+
+
 												<div class="sgt-text">
-													<h4>Full name </h4>
-													<span>Username</span>
+													<h4 class="hover_username"> {{suggestion.full_name}}</h4>
+													<span class="hover_username">{{suggestion.username}}</span>
 												</div>
 												<span><i class="la la-arrow-right"></i></span>
-											</div>
-									
+											</div></a>
+										{% endfor %}
 										
 										
 										
 											<div class="view-more">
-												<a href="/static/#" title="">View All</a>
+												<a href="/suggestions" title="">View All</a>
 											</div>
 										</div><!--suggestions-list end-->
 									</div><!--suggestions end-->
@@ -58,7 +90,6 @@
 					
 										<div class="cp-sec">
 											<img src="/static/images/logo2.png" alt="">
-											<p><img src="/static/images/cp.png" alt="">Copyright 2018</p>
 										</div>
 									</div><!--tags-sec end-->
 								</div><!--main-left-sidebar end-->
@@ -67,7 +98,7 @@
 								<div class="main-ws-sec">
 									<div class="post-topbar">
 									<div class="post-project-fields">
-					<form>
+					<form action="postmessage"  method="post">
 						<div class="row">
 							<div class="col-lg-12">
 								<input type="text" name="title" placeholder="Your Title">
@@ -85,36 +116,60 @@
 				</div>
 									
 									</div><!--post-topbar end-->
+
+
 									<div class="posts-section">
+										  {% for post in posts %}
 										<div class="post-bar">
 											<div class="post_topbar">
 												<div class="usy-dt">
-													<img src="http://via.placeholder.com/50x50" alt="">
+
+														{% if post.profil_media %}
+								<img src="/static/avatar/{{ post.profil_media }}" style="    width: 50px;" alt="">
+							{% else %}
+							<img src="http://via.placeholder.com/50x50" alt="">
+							{% endif %}
+
+
+													
 													<div class="usy-name">
-														<h3>John Doe</h3>
-														<span><img src="/static/images/clock.png" alt="">3 min ago</span>
+														<a href="/profile/{{ post.username }}"  ><h3 class="hover_username" >{{ post.full_name }}</h3></a>
+														<span><img src="/static/images/clock.png" alt="">{{ 
+
+													post.created }}</span>
 													</div>
 												</div>
 											
 											</div>
 					
 											<div class="job_descp">
-												<h3>Title</h3>
+												<h3>{{ post.title }}</h3>
 										
-												<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam luctus hendrerit metus, ut ullamcorper quam finibus at. Etiam id magna sit amet...</p>
+												<p>{{ post.message }}</p>
 											
 											</div>
 											<div class="job-status-bar">
 												<ul class="like-com">
 													<li>
-														<a href="/static/#"> 200 <i class="la la-heart"></i> Likes</a>
+														<a href="#link_post_like_{{ post.id }}" 
+														id="link_post_like_{{ post.id }}"
+														onclick="like({{ post.id }})"
+
+													{% if post.liked == 1 %}
+													class="active"
+													{% endif %}
+														> 
+
+															<em id="nb_like_{{ post.id }}">{{ post.nb_like }}</em> 
+															<i class="la la-heart"></i><em id="text_like_{{ post.id }}">Likes</em>
+														</a>
 														
 													</li> 
-													<li><a href="/static/#" title="" class="com"><img src="images/com.png" alt="">15 Comments</a></li>
+													<li><a href="/post/{{ post.id }}" title="" class="com"><img src="images/com.png" alt="">{{ post.nb_comment }} Comments</a></li>
 												</ul>
 											</div>
 										</div><!--post-bar end-->
-										
+										 {% endfor %}
 								<!-- 		<div class="process-comm">
 											<div class="spinner">
 												<div class="bounce1"></div>

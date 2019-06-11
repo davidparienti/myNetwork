@@ -1,0 +1,108 @@
+{% include "include/header.html" %}
+
+<section class="profile-account-setting">
+			<div class="container">
+				<div class="account-tabs-setting">
+					<div class="row">
+						<div class="col-lg-3">
+							<div class="acc-leftbar">
+								<div class="nav nav-tabs" id="nav-tab" role="tablist">
+								    <a class="nav-item nav-link active" id="nav-acc-tab" data-toggle="tab" href="#nav-acc" role="tab" aria-controls="nav-acc" aria-selected="true"><i class="la la-cogs"></i>Account Setting</a>
+								  <a class="nav-item nav-link" id="nav-password-tab" data-toggle="tab" href="#nav-password" role="tab" aria-controls="nav-password" aria-selected="false"><i class="fa fa-lock"></i>Change Password</a>
+								  </div>
+							</div><!--acc-leftbar end-->
+						</div>
+						<div class="col-lg-9">
+							<div class="tab-content" id="nav-tabContent">
+								<div class="tab-pane fade show active" id="nav-acc" role="tabpanel" aria-labelledby="nav-acc-tab">
+									<div class="acc-setting">
+										<h3>Account Setting</h3>
+										<form method="post" action="/setting" enctype="multipart/form-data">{% if success_message_p %}
+										<div class="success"> {{ success_message_p }} </div>
+										{% endif %}
+											<div class="cp-field">
+												<h5>Change your profile picture</h5><br>
+												<br>
+												<br>
+											
+													<input type="file" name="file" style="border:0px;">
+										
+											</div>
+											<div class="save-stngs">
+												<ul>
+													<li><button type="submit">Save New Picture</button></li>
+												</ul>
+											</div><!--save-stngs end-->
+										</form>
+									</div><!--acc-setting end-->
+								</div>
+							
+							  	<div class="tab-pane fade" id="nav-password" role="tabpanel" aria-labelledby="nav-password-tab">
+							  		<div class="acc-setting">
+										<h3>Account Setting</h3>
+
+										<form method="post" action="/newpass" >
+											{% if success_message %}
+										<div class="success"> {{ success_message }} </div>
+										{% endif %}
+										
+											<div class="cp-field">
+												<h5>Old Password</h5>
+												<div class="cpp-fiel">
+													<input type="text" name="old_password" placeholder="Old Password">		{% if 'old_password' in error_array %}
+														<div class="error_field">{{ error_array['old_password'] }}
+														</div>
+													{% endif %}
+													<i class="fa fa-lock"></i>
+												</div>
+										
+											</div>
+											<div class="cp-field">
+												<h5>New Password</h5>
+												<div class="cpp-fiel">
+													<input type="text" name="new_password" placeholder="New Password">
+												{% if 'new_password' in error_array %}
+														<div class="error_field">{{ error_array['new_password'] }}
+														</div>
+													{% endif %}
+													<i class="fa fa-lock"></i>
+												</div>
+											</div>
+											<div class="cp-field">
+												<h5>Repeat Password</h5>
+												<div class="cpp-fiel">
+													<input type="text" name="repeat_password" placeholder="Repeat Password">
+													{% if 'repeat_password' in error_array %}
+														<div class="error_field">{{ error_array['repeat_password'] }}
+														</div>
+													{% endif %}
+													<i class="fa fa-lock"></i>
+												</div>
+											</div>
+									
+											<div class="save-stngs pd2">
+												<ul><br>
+													<li><button type="submit">Change Password</button></li>
+												</ul>
+											</div><!--save-stngs end-->
+										</form>
+									</div><!--acc-setting end-->
+							  	</div>
+							 
+							</div>
+						</div>
+					</div>
+				</div><!--account-tabs-setting end-->
+			</div>
+		</section>
+{% if request.path == "/newpass" %} 
+<script type="text/javascript">
+	$( document ).ready(function() {
+	$("#nav-password-tab").tab('show');
+
+});
+</script>
+{% endif %}
+{% include "include/footer.html" %}
+
+

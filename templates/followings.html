@@ -1,0 +1,53 @@
+{% include "include/header.html" %}
+
+
+		<section class="companies-info">
+			<div class="container">
+				<div class="company-title">
+					<h3>All Following of {{ user.full_name }}</h3>
+				</div><!--company-title end-->
+				<div class="companies-list">
+					<div class="row">
+						 {% for following in followings %}
+						<div class="col-lg-3 col-md-4 col-sm-6 col-12">
+							<div class="company_profile_info">
+								<div class="company-up-info">
+
+
+											{% if following.profil_media %}
+
+									<img src="/static/avatar/{{following.profil_media}}" alt="">
+
+											{% else %}
+
+										
+									<img src="http://via.placeholder.com/91x91" alt="">
+
+											
+											{% endif %}
+
+
+
+
+									<a href="/profile/{{ following.username }}" title="" class="view-more-pro hover_username"><h3 class="hover_username">{{ following.full_name }}</h3>
+									<h4 class="hover_username">{{ following.username }}</h4>
+								</a>
+									<ul>
+										{% if following.followed == 1 %}
+											<li><a href="#" title="" id="follow_button_{{ following.username }}"  onclick="follow('{{ following.username }}')" class="follow">Unfollow</a></li>
+											{% else %}
+											<li><a href="#" title="" id="follow_button_{{ following.username }}"  onclick="follow('{{ following.username }}')" class="follow">Follow</a></li>
+											{% endif %}
+									</ul>
+								</div>
+								<a href="/profile/{{ following.username }}" title="" class="view-more-pro hover_username">View Profile</a>
+							</div><!--company_profile_info end-->
+						</div>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		</section><!--companies-info end-->
+
+
+		{% include "include/footer.html" %}
